@@ -5,6 +5,8 @@ metadata:
   annotations: {}
   name: "nginx"
   labels:
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/instance: nginx
     nirmata.io/deployment.name: "nginx"
     nirmata.io/application.name: "nginx"
     nirmata.io/component: "nginx"
@@ -13,6 +15,8 @@ spec:
   revisionHistoryLimit: 5
   selector:
     matchLabels:
+      app.kubernetes.io/name: nginx
+      app.kubernetes.io/instance: nginx
       nirmata.io/component: "nginx"
     matchExpressions: []
   strategy:
@@ -24,6 +28,8 @@ spec:
     metadata:
       annotations: {}
       labels:
+        app.kubernetes.io/name: nginx
+        app.kubernetes.io/instance: nginx
         nirmata.io/deployment.name: "nginx"
         nirmata.io/component: "nginx"
     spec:
@@ -36,7 +42,7 @@ spec:
         command: []
         args: []
         ports:
-        - containerPort: 80
+        - containerPort: 8080
           protocol: "TCP"
         readinessProbe:
           tcpSocket:
@@ -55,7 +61,23 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        securityContext:
+          readOnlyRootFilesystem: true
       securityContext:
         runAsNonRoot: true
         readOnlyRootFilesystem: true
-
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "nginx-svc"
+  labels:
+    app: "nginx"
+spec:
+  type: "ClusterIP"
+  selector:
+    app.kubernetes.io/name: nginx
+    app.kubernetes.io/instance: "nginx"
+  ports:
+  - port: 8080
+    protocol: "TCP"
