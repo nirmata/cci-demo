@@ -6,6 +6,8 @@ metadata:
   labels:
     app.kubernetes.io/name: nginx
     app.kubernetes.io/instance: nginx
+  annotations:
+    sample.annotation: test-1
 spec:
   replicas: 1 
   selector:
