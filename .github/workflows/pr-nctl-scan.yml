@@ -28,7 +28,7 @@ jobs:
           unzip *.zip
 
       - name: Check nctl install
-        run: nctl version
+        run: ./nctl version
 
       - name: Download policies
         uses: actions/checkout@v2
@@ -38,4 +38,4 @@ jobs:
 
       - name: Validate manifests
         run: |
-          nctl scan --policies cci-policies/policies --resource=./nginx
+          ./nctl scan --policies cci-policies/policies --resource=./nginx
