@@ -26,18 +26,17 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: nirmata/cci-policies
-          path: './policies'
+          path: './cci-policies'
 
       - name: Install Nirmata CLI
         run: |
           curl -O -L -s https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.3.7/nctl_3.3.7_linux_64-bit.zip
           unzip *.zip
+          ls -lR ./cci-policies
 
       - name: Check nctl install
         run: ./nctl version
 
       - name: Validate manifests
         run: |
-          ls -l
-          ls -lR ./policies
-          ./nctl scan --policies ./policies/cci-policies/policies --resource=./nginx
+          ./nctl scan --policies ./cci-policies/policies --resource=./nginx
