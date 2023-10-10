@@ -39,4 +39,4 @@ jobs:
 
       - name: Validate manifests
         run: |
-          ./nctl scan --policies ./cci-policies/policies --resource=./nginx
+          ./nctl scan --policies ./cci-policies/policies --resource=./nginx -e
