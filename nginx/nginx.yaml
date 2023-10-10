@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: nginx
     app.kubernetes.io/instance: nginx
   annotations:
-    nirmata.io/type: test
+    nirmata.io/type: test-1
 spec:
   replicas: 1 
   selector:
