@@ -22,6 +22,12 @@ jobs:
       - name: Checkout manifests
         uses: actions/checkout@v2
 
+      - name: Download policies
+        uses: actions/checkout@v2
+        with:
+          repository: nirmata/cci-policies
+          path: './policies'
+
       - name: Install Nirmata CLI
         run: |
           curl -O -L -s https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.3.7/nctl_3.3.7_linux_64-bit.zip
@@ -30,12 +36,6 @@ jobs:
       - name: Check nctl install
         run: ./nctl version
 
-      - name: Download policies
-        uses: actions/checkout@v2
-        with:
-          repository: nirmata/cci-policies
-          path: './'
-
       - name: Validate manifests
         run: |
-          ./nctl scan --policies cci-policies/policies --resource=./nginx
+          ./nctl scan --policies ./policies/cci-policies/policies --resource=./nginx
