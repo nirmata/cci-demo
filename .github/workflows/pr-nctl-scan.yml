@@ -13,7 +13,7 @@ jobs:
   scan-manifests:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: read|write
       packages: write
       id-token: write
 
