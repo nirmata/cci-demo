@@ -33,7 +33,7 @@ jobs:
 #          curl -O -L -s https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.3.7/nctl_3.3.7_linux_64-bit.zip
 #          unzip *.zip
 #         ls -lR ./cci-policies
-      - name: Copy a file from s3
+      - name: Install Nirmata CLI
         uses: keithweaver/aws-s3-github-action@v1.0.0
         with:
           command: cp
@@ -45,23 +45,13 @@ jobs:
           
       - name: Check nctl install
         run: |
-          ls -l
           sudo chmod 755 ./nctl
-          #git update-index --add --chmod=+x ./nctl
           ./nctl version
 
       - name: Validate manifests
         run: |
           ./nctl scan --policies ./cci-policies/policies --resource=./nginx -e
-#          ./nctl scan --policies ./cci-policies/policies --resource=./nginx -f json -o temp.json
-#          FAIL_COUNT=$(cat ./temp.json |jq '.OverallSummary.Fail')
-#          echo $FAIL_COUNT
-#          if [[ $FAIL_COUNT == "0" ]]; then
-#            echo "No errors found"
-#          else
-#            echo "$FAIL_COUNT errors found"
-#            exit 1
-#          fi
+
       - name: Validate dockerfile
         run: |
           ./nctl scan --policies ./cci-policies/docker-policies --resource=./docker/Dockerfile --resource-type dockerfile -e
