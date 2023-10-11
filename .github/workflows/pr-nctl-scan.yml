@@ -46,7 +46,8 @@ jobs:
       - name: Check nctl install
         run: |
           ls -l
-          git update-index --add --chmod=+x ./nctl
+          sudo chmod 755 ./nctl
+          #git update-index --add --chmod=+x ./nctl
           ./nctl version
 
       - name: Validate manifests
