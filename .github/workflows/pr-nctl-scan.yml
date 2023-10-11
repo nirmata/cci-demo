@@ -51,6 +51,15 @@ jobs:
       - name: Validate manifests
         run: |
           ./nctl scan --policies ./cci-policies/policies --resource=./nginx -e
+          ./nctl scan --policies ./cci-policies/policies --resource=./nginx -f json -o temp.json
+          FAIL_COUNT=$(cat ./temp.json |jq '.OverallSummary.Fail')
+          echo $FAIL_COUNT
+          if [[ $FAIL_COUNT == "0" ]]; then
+            echo "No errors found"
+          else
+            echo "$FAIL_COUNT errors found"
+            exit 1
+          fi
 
       - name: Validate dockerfile
         run: |
