@@ -42,7 +42,9 @@ jobs:
           dest: './nctl'
 
       - name: Check nctl install
-        run: ./nctl version
+        run: |
+          chmod 755 ./nctl
+          ./nctl version
 
       - name: Validate manifests
         run: |
