@@ -51,7 +51,7 @@ jobs:
       - name: Validate manifests
         run: |
           ./nctl scan --policies ./cci-policies/policies --resource=./nginx -e
-          ./nctl scan --policies ./cci-policies/policies --resource=./nginx -f json -o temp.json
+          ./nctl scan --policies ./cci-policies/policies --resource=./nginx -o json --file temp.json
           FAIL_COUNT=$(cat ./temp.json |jq '.OverallSummary.Fail')
           echo $FAIL_COUNT
           if [[ $FAIL_COUNT == "0" ]]; then
