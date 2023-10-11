@@ -43,6 +43,7 @@ jobs:
 
       - name: Check nctl install
         run: |
+          ls -l
           git update-index --chmod=+x ./nctl
           ./nctl version
 
