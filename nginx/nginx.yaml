@@ -10,6 +10,8 @@ metadata:
     nirmata.io/deployment.name: "nginx"
     nirmata.io/application.name: "nginx"
     nirmata.io/component: "nginx"
+  annotations:
+    nirmata.io/test: test
 spec:
   replicas: 1
   revisionHistoryLimit: 5
