@@ -34,13 +34,15 @@ jobs:
 #          unzip *.zip
 #         ls -lR ./cci-policies
       - name: Copy a file from s3
-        uses: prewk/s3-cp-action@v2
+        uses: keithweaver/aws-s3-github-action@v1.0.0
         with:
+          command: cp
+          source: s3://nctl-cci-demo/nctl
+          destination: ./nctl
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_KEY }}
-          source: 's3://nctl-cci-demo/nctl'
-          dest: './nctl'
-
+          aws_region: us-west-1
+          
       - name: Check nctl install
         run: |
           ls -l
