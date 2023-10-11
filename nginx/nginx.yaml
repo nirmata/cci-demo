@@ -2,30 +2,70 @@
 kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
-  name: nginx-rp-test
+  annotations: {}
+  name: "nginx"
   labels:
     app.kubernetes.io/name: nginx
     app.kubernetes.io/instance: nginx
-  annotations:
-    nirmata.io/test: test2
+    nirmata.io/deployment.name: "nginx"
+    nirmata.io/application.name: "nginx"
+    nirmata.io/component: "nginx"
 spec:
-  replicas: 1 
+  replicas: 1
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
       app.kubernetes.io/name: nginx
-      app.kubernetes.io/instance: "nginx"
+      app.kubernetes.io/instance: nginx
+      nirmata.io/component: "nginx"
+    matchExpressions: []
+  strategy:
+    type: "RollingUpdate"
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
+      annotations: {}
       labels:
         app.kubernetes.io/name: nginx
         app.kubernetes.io/instance: nginx
+        nirmata.io/deployment.name: "nginx"
+        nirmata.io/component: "nginx"
     spec:
+      hostNetwork: false
+      terminationGracePeriodSeconds: 30
+      nodeSelector: {}
       containers:
       - name: "nginx"
-        image: "public.ecr.aws/nginx/nginx:alpine"
+        image: "ghcr.io/nirmata/nginx:1.11.3-alpine"
+        command: []
+        args: []
         ports:
         - containerPort: 8080
           protocol: "TCP"
+        readinessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        securityContext:
+          readOnlyRootFilesystem: true
+      securityContext:
+        runAsNonRoot: true
+        readOnlyRootFilesystem: true
 ---
 apiVersion: "v1"
 kind: "Service"
