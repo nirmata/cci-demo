@@ -28,11 +28,11 @@ jobs:
           repository: nirmata/cci-policies
           path: './cci-policies'
 
-     - name: Install Nirmata CLI
-       run: |
+      - name: Install Nirmata CLI
+        run: |
          curl -O -L -s https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.3.8-rc2/nctl_3.3.8-rc2_linux_64-bit.zip
          unzip *.zip
-        ls -lR ./cci-policies
+        # ls -lR ./cci-policies
       # - name: Install Nirmata CLI
       #   uses: keithweaver/aws-s3-github-action@v1.0.0
       #   with:
