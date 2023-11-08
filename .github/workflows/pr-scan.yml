@@ -1,9 +1,6 @@
 name: PR-scan
 
-on:
-  pull_request:
-    branches:
-    - main
+on: [push]
 
 concurrency:
   group: ci-build-${{ github.ref }}-1
