@@ -1,4 +1,4 @@
-name: PR-scan
+name: PR-NCTL-scan
 
 on:
   pull_request:
