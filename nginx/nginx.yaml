@@ -9,7 +9,7 @@ metadata:
   annotations:
     nirmata: test1
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app.kubernetes.io/name: nginx
