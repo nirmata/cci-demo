@@ -1,9 +1,6 @@
 name: PR-scan
 
-on:
-  pull_request:
-    branches:
-    - main
+on: [push]
 
 concurrency:
   group: ci-build-${{ github.ref }}-1
@@ -23,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Kyverno CLI
-        uses: kyverno/action-install-cli@vv0.2.0
+        uses: kyverno/action-install-cli@v0.2.0
 
       - name: Check Kyverno install
         run: kyverno version
