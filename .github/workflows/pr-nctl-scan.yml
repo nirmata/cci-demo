@@ -22,11 +22,11 @@ jobs:
       - name: Checkout manifests
         uses: actions/checkout@v2
 
-      - name: Download policies
-        uses: actions/checkout@v2
-        with:
-          repository: nirmata/cci-policies
-          path: './cci-policies'
+      # - name: Download policies
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: nirmata/cci-policies
+      #     path: './cci-policies'
 
       - name: Install Nirmata CLI
         run: |
@@ -50,8 +50,8 @@ jobs:
 
       - name: Validate manifests
         run: |
-          ./nctl scan --policies ./cci-policies/policies --resources=./nginx --details
-          ./nctl scan --policies ./cci-policies/policies --resources=./nginx -o json --file temp.json --resource-type kubernetes
+          ./nctl scan --resources=./nginx --details
+          # ./nctl scan --policies ./cci-policies/policies --resources=./nginx -o json --file temp.json --resource-type kubernetes
           # FAIL_COUNT=$(cat ./temp.json |jq '.OverallSummary.Fail')
           # echo $FAIL_COUNT
           # if [[ $FAIL_COUNT == "0" ]]; then
@@ -63,4 +63,4 @@ jobs:
 
       - name: Validate dockerfile
         run: |
-          ./nctl scan --policies ./cci-policies/docker-policies --resource=./docker/Dockerfile --resource-type dockerfile --details
+          ./nctl scan --policies --policies https://github.com/nirmata/cci-policies/tree/main/docker-policies --resource=./docker/Dockerfile --details

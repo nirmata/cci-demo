@@ -6,7 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: nginx
     app.kubernetes.io/instance: nginx
-    test:test
+    test: test
 spec:
   replicas: 1 
   selector:
@@ -19,12 +19,31 @@ spec:
         app.kubernetes.io/name: nginx
         app.kubernetes.io/instance: nginx
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: "nginx"
         image: "public.ecr.aws/nginx/nginx:alpine"
         ports:
         - containerPort: 8080
           protocol: "TCP"
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          seccompProfile:
+            type: "RuntimeDefault"
+          capabilities:
+            drop:
+              - ALL
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
 ---
 apiVersion: "v1"
 kind: "Service"
