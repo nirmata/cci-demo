@@ -50,7 +50,7 @@ jobs:
 
       - name: Validate manifests
         run: |
-          ./nctl scan --resources=./nginx --details
+          ./nctl scan kubernetes --resources=./nginx --details
           # ./nctl scan --policies ./cci-policies/policies --resources=./nginx -o json --file temp.json --resource-type kubernetes
           # FAIL_COUNT=$(cat ./temp.json |jq '.OverallSummary.Fail')
           # echo $FAIL_COUNT
@@ -63,4 +63,4 @@ jobs:
 
       - name: Validate dockerfile
         run: |
-          ./nctl scan --policies --policies https://github.com/nirmata/cci-policies/tree/main/docker-policies --resource=./docker/Dockerfile --details
+          ./nctl scan dockerfile --policies --policies https://github.com/nirmata/cci-policies/tree/main/docker-policies --resource=./docker/Dockerfile --details
