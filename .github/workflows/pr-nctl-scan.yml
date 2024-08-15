@@ -32,7 +32,7 @@ jobs:
         run: |
          curl -O -L -s https://dl.nirmata.io/nctl/nctl_4.2.0/nctl_4.2.0_linux_amd64.zip
          unzip *.zip
-         ls -lR ./cci-policies
+      #   ls -lR ./cci-policies
       # - name: Install Nirmata CLI
       #   uses: keithweaver/aws-s3-github-action@v1.0.0
       #   with:
