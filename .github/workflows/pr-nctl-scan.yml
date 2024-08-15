@@ -50,8 +50,8 @@ jobs:
 
       - name: Validate manifests
         run: |
-          ./nctl scan --policies ./cci-policies/policies --resources=./nginx --details
-          ./nctl scan --policies ./cci-policies/policies --resources=./nginx -o json --file temp.json --resource-type kubernetes
+          ./nctl scan kubernetes --policies ./cci-policies/policies --resources=./nginx --details
+          ./nctl scan kubernetes --policies ./cci-policies/policies --resources=./nginx -o json --file temp.json --resource-type kubernetes
           # FAIL_COUNT=$(cat ./temp.json |jq '.OverallSummary.Fail')
           # echo $FAIL_COUNT
           # if [[ $FAIL_COUNT == "0" ]]; then
@@ -63,4 +63,4 @@ jobs:
 
       - name: Validate dockerfile
         run: |
-          ./nctl scan --policies ./cci-policies/docker-policies --resource=./docker/Dockerfile --resource-type dockerfile --details
+          ./nctl scan dockerfile --policies ./cci-policies/docker-policies --resources=./docker/Dockerfile --details
