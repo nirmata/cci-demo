@@ -29,6 +29,7 @@ spec:
         securityContext:
           runAsUser: 1000
           runAsGroup: 1000
+          runAsNonRootUser: false
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
           seccompProfile:
