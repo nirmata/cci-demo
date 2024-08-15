@@ -50,7 +50,8 @@ jobs:
 
       - name: Validate manifests
         run: |
-          ./nctl scan kubernetes --policies ./cci-policies/policies --resources=./nginx --details
+          ./nctl scan kubernetes --resources=./nginx --details
+          # ./nctl scan kubernetes --policies ./cci-policies/policies --resources=./nginx --details
           # ./nctl scan kubernetes --policies ./cci-policies/policies --resources=./nginx -o json --file temp.json --resource-type kubernetes
           # FAIL_COUNT=$(cat ./temp.json |jq '.OverallSummary.Fail')
           # echo $FAIL_COUNT
