@@ -1,2 +1,2 @@
 # cci-demo
-Repo for demonstrating policy enforcement in CICD pipeline
+Repository for demonstrating Nirmata policy enforcement in CI/CD pipelines
