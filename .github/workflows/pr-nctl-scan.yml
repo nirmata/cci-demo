@@ -30,7 +30,7 @@ jobs:
 
       - name: Install Nirmata CLI
         run: |
-         curl -O -L -s https://nirmata-downloads.s3.us-east-2.amazonaws.com/nctl/nctl_3.3.8-rc2/nctl_3.3.8-rc2_linux_64-bit.zip
+         curl -O -L -s https://dl.nirmata.io/nctl/nctl_4.2.0/nctl_4.2.0_linux_amd64.zip
          unzip *.zip
          ls -lR ./cci-policies
       # - name: Install Nirmata CLI
