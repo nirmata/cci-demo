@@ -19,7 +19,6 @@ spec:
         app.kubernetes.io/name: nginx
         app.kubernetes.io/instance: nginx
     spec:
-      automountServiceAccountToken: false
       containers:
       - name: "nginx"
         image: "public.ecr.aws/nginx/nginx:alpine"
