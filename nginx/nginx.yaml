@@ -34,9 +34,6 @@ spec:
           allowPrivilegeEscalation: false
           seccompProfile:
             type: "RuntimeDefault"
-          capabilities:
-            drop:
-              - ALL
         resources:
           limits:
             memory: "128Mi"
